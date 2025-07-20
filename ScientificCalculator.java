@@ -32,8 +32,13 @@ public class ScientificCalculator {
                 case 13: performRound(scanner); break;
                 case 14: performCeiling(scanner); break;
                 case 15: performFloor(scanner); break;
-                case 0: System.out.println("Exiting calculator. Goodbye!"); break;
-                default: System.out.println("Invalid choice. Please try again.");
+                case 16: performMin(scanner); break;
+                case 17: performMax(scanner); break;
+                case 0:
+                    System.out.println("Exiting calculator. Goodbye!");
+                    break;
+                default:
+                    System.out.println("Invalid choice. Please try again.");
             }
 
         } while (choice != 0);
@@ -58,6 +63,8 @@ public class ScientificCalculator {
         System.out.println("13. Round Number");
         System.out.println("14. Ceiling (Round Up)");
         System.out.println("15. Floor (Round Down)");
+        System.out.println("16. Minimum of Two Numbers");
+        System.out.println("17. Maximum of Two Numbers");
         System.out.println("0. Exit");
         System.out.print("Choose an option: ");
     }
@@ -109,6 +116,12 @@ public class ScientificCalculator {
     }
     public static double floorNumber(double a) {
         return Math.floor(a);
+    }
+    public static double findMin(double a, double b) {
+        return Math.min(a, b);
+    }
+    public static double findMax(double a, double b) {
+        return Math.max(a, b);
     }
 
     // --- Interaction Methods ---
@@ -272,6 +285,30 @@ public class ScientificCalculator {
             System.out.print("Enter number: ");
             double a = s.nextDouble();
             System.out.println("Result (floor): " + floorNumber(a));
+        } catch (Exception e) {
+            System.out.println("Invalid input."); s.nextLine();
+        }
+    }
+
+    private static void performMin(Scanner s) {
+        try {
+            System.out.print("Enter first number: ");
+            double a = s.nextDouble();
+            System.out.print("Enter second number: ");
+            double b = s.nextDouble();
+            System.out.println("Result (min): " + findMin(a, b));
+        } catch (Exception e) {
+            System.out.println("Invalid input."); s.nextLine();
+        }
+    }
+
+    private static void performMax(Scanner s) {
+        try {
+            System.out.print("Enter first number: ");
+            double a = s.nextDouble();
+            System.out.print("Enter second number: ");
+            double b = s.nextDouble();
+            System.out.println("Result (max): " + findMax(a, b));
         } catch (Exception e) {
             System.out.println("Invalid input."); s.nextLine();
         }
