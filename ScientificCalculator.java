@@ -23,6 +23,9 @@ public class ScientificCalculator {
                 case 2:
                     performSubtraction(scanner);
                     break;
+                case 3:
+                    performMultiplication(scanner);
+                    break;
                 case 0:
                     System.out.println("Exiting calculator. Goodbye!");
                     break;
@@ -67,6 +70,10 @@ public class ScientificCalculator {
         return num1 - num2;
     }
 
+    public static double multiply(double num1, double num2) {
+        return num1 * num2;
+    }
+
     // --- Interaction Methods ---
     private static void performAddition(Scanner scanner) {
         try {
@@ -93,6 +100,22 @@ public class ScientificCalculator {
             double num2 = scanner.nextDouble();
 
             double result = subtract(num1, num2);
+            System.out.println("Result: " + result);
+        } catch (Exception e) {
+            System.out.println("Invalid input. Please enter numbers.");
+            scanner.nextLine(); // clear invalid input
+        }
+    }
+
+    private static void performMultiplication(Scanner scanner) {
+        try {
+            System.out.print("Enter the first number: ");
+            double num1 = scanner.nextDouble();
+
+            System.out.print("Enter the second number: ");
+            double num2 = scanner.nextDouble();
+
+            double result = multiply(num1, num2);
             System.out.println("Result: " + result);
         } catch (Exception e) {
             System.out.println("Invalid input. Please enter numbers.");
