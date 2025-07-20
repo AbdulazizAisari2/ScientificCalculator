@@ -29,6 +29,9 @@ public class ScientificCalculator {
                 case 4:
                     performDivision(scanner);
                     break;
+                case 5:
+                    performSquareRoot(scanner);
+                    break;
                 case 0:
                     System.out.println("Exiting calculator. Goodbye!");
                     break;
@@ -73,4 +76,109 @@ public class ScientificCalculator {
         return num1 - num2;
     }
 
-    public static double m
+    public static double multiply(double num1, double num2) {
+        return num1 * num2;
+    }
+
+    public static double divide(double num1, double num2) {
+        if (num2 == 0) {
+            throw new ArithmeticException("Cannot divide by zero.");
+        }
+        return num1 / num2;
+    }
+
+    public static double calculateSquareRoot(double num) {
+        if (num < 0) {
+            throw new ArithmeticException("Cannot calculate square root of a negative number.");
+        }
+        return Math.sqrt(num);
+    }
+
+    // --- Interaction Methods ---
+    private static void performAddition(Scanner scanner) {
+        try {
+            System.out.print("Enter the first number: ");
+            double num1 = scanner.nextDouble();
+
+            System.out.print("Enter the second number: ");
+            double num2 = scanner.nextDouble();
+
+            double result = add(num1, num2);
+            System.out.println("Result: " + result);
+        } catch (Exception e) {
+            System.out.println("Invalid input. Please enter numbers.");
+            scanner.nextLine(); // clear invalid input
+        }
+    }
+
+    private static void performSubtraction(Scanner scanner) {
+        try {
+            System.out.print("Enter the first number: ");
+            double num1 = scanner.nextDouble();
+
+            System.out.print("Enter the second number: ");
+            double num2 = scanner.nextDouble();
+
+            double result = subtract(num1, num2);
+            System.out.println("Result: " + result);
+        } catch (Exception e) {
+            System.out.println("Invalid input. Please enter numbers.");
+            scanner.nextLine(); // clear invalid input
+        }
+    }
+
+    private static void performMultiplication(Scanner scanner) {
+        try {
+            System.out.print("Enter the first number: ");
+            double num1 = scanner.nextDouble();
+
+            System.out.print("Enter the second number: ");
+            double num2 = scanner.nextDouble();
+
+            double result = multiply(num1, num2);
+            System.out.println("Result: " + result);
+        } catch (Exception e) {
+            System.out.println("Invalid input. Please enter numbers.");
+            scanner.nextLine(); // clear invalid input
+        }
+    }
+
+    private static void performDivision(Scanner scanner) {
+        try {
+            System.out.print("Enter the numerator: ");
+            double num1 = scanner.nextDouble();
+
+            System.out.print("Enter the denominator: ");
+            double num2 = scanner.nextDouble();
+
+            if (num2 == 0) {
+                System.out.println("Error: Cannot divide by zero.");
+                return;
+            }
+
+            double result = divide(num1, num2);
+            System.out.println("Result: " + result);
+        } catch (Exception e) {
+            System.out.println("Invalid input. Please enter numbers.");
+            scanner.nextLine(); // clear invalid input
+        }
+    }
+
+    private static void performSquareRoot(Scanner scanner) {
+        try {
+            System.out.print("Enter a number: ");
+            double num = scanner.nextDouble();
+
+            if (num < 0) {
+                System.out.println("Error: Cannot calculate square root of a negative number.");
+                return;
+            }
+
+            double result = calculateSquareRoot(num);
+            System.out.println("Result: " + result);
+        } catch (Exception e) {
+            System.out.println("Invalid input. Please enter a number.");
+            scanner.nextLine(); // clear invalid input
+        }
+    }
+}
