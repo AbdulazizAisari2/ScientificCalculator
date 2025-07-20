@@ -11,17 +11,14 @@ public class ScientificCalculator {
 
             while (!scanner.hasNextInt()) {
                 System.out.print("Invalid input. Please enter a number: ");
-                scanner.next(); // clear invalid input
+                scanner.next(); // discard invalid input
             }
 
             choice = scanner.nextInt();
 
             switch (choice) {
                 case 1:
-                    // performAddition(scanner);
-                    break;
-                case 2:
-                    // performSubtraction(scanner);
+                    performAddition(scanner);
                     break;
                 case 0:
                     System.out.println("Exiting calculator. Goodbye!");
@@ -56,5 +53,27 @@ public class ScientificCalculator {
         System.out.println("17. Maximum of Two Numbers");
         System.out.println("0. Exit");
         System.out.print("Choose an option: ");
+    }
+
+    // --- Logic Method ---
+    public static double add(double num1, double num2) {
+        return num1 + num2;
+    }
+
+    // --- Interaction Method ---
+    private static void performAddition(Scanner scanner) {
+        try {
+            System.out.print("Enter the first number: ");
+            double num1 = scanner.nextDouble();
+
+            System.out.print("Enter the second number: ");
+            double num2 = scanner.nextDouble();
+
+            double result = add(num1, num2);
+            System.out.println("Result: " + result);
+        } catch (Exception e) {
+            System.out.println("Invalid input. Please enter numbers.");
+            scanner.nextLine(); // clear invalid input
+        }
     }
 }
