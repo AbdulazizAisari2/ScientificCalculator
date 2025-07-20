@@ -44,6 +44,12 @@ public class ScientificCalculator {
                 case 9:
                     performTangent(scanner);
                     break;
+				case 10:
+                    performNaturalLog(scanner);
+                    break;
+                case 11:
+                    performLogBase10(scanner);
+                    break;
                 case 0:
                     System.out.println("Exiting calculator. Goodbye!");
                     break;
@@ -266,6 +272,55 @@ public class ScientificCalculator {
             System.out.println("Result (tan): " + result);
         } catch (ArithmeticException e) {
             System.out.println("Math error: " + e.getMessage());
+        } catch (Exception e) {
+            System.out.println("Invalid input.");
+            scanner.nextLine();
+        }
+    }
+	public static double calculateNaturalLogarithm(double num) {
+        if (num <= 0) {
+            throw new ArithmeticException("Natural log undefined for zero or negative numbers.");
+        }
+        return Math.log(num);
+    }
+
+    public static double calculateLogarithmBase10(double num) {
+        if (num <= 0) {
+            throw new ArithmeticException("Log base 10 undefined for zero or negative numbers.");
+        }
+        return Math.log10(num);
+    }
+
+    private static void performNaturalLog(Scanner scanner) {
+        try {
+            System.out.print("Enter a positive number: ");
+            double num = scanner.nextDouble();
+
+            if (num <= 0) {
+                System.out.println("Error: ln is undefined for zero or negative numbers.");
+                return;
+            }
+
+            double result = calculateNaturalLogarithm(num);
+            System.out.println("Result (ln): " + result);
+        } catch (Exception e) {
+            System.out.println("Invalid input.");
+            scanner.nextLine();
+        }
+    }
+
+    private static void performLogBase10(Scanner scanner) {
+        try {
+            System.out.print("Enter a positive number: ");
+            double num = scanner.nextDouble();
+
+            if (num <= 0) {
+                System.out.println("Error: log₁₀ is undefined for zero or negative numbers.");
+                return;
+            }
+
+            double result = calculateLogarithmBase10(num);
+            System.out.println("Result (log₁₀): " + result);
         } catch (Exception e) {
             System.out.println("Invalid input.");
             scanner.nextLine();
