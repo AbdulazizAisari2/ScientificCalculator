@@ -32,6 +32,9 @@ public class ScientificCalculator {
                 case 5:
                     performSquareRoot(scanner);
                     break;
+                case 6:
+                    performPower(scanner);
+                    break;
                 case 0:
                     System.out.println("Exiting calculator. Goodbye!");
                     break;
@@ -92,6 +95,10 @@ public class ScientificCalculator {
             throw new ArithmeticException("Cannot calculate square root of a negative number.");
         }
         return Math.sqrt(num);
+    }
+
+    public static double calculatePower(double base, double exponent) {
+        return Math.pow(base, exponent);
     }
 
     // --- Interaction Methods ---
@@ -178,6 +185,22 @@ public class ScientificCalculator {
             System.out.println("Result: " + result);
         } catch (Exception e) {
             System.out.println("Invalid input. Please enter a number.");
+            scanner.nextLine(); // clear invalid input
+        }
+    }
+
+    private static void performPower(Scanner scanner) {
+        try {
+            System.out.print("Enter the base: ");
+            double base = scanner.nextDouble();
+
+            System.out.print("Enter the exponent: ");
+            double exponent = scanner.nextDouble();
+
+            double result = calculatePower(base, exponent);
+            System.out.println("Result: " + result);
+        } catch (Exception e) {
+            System.out.println("Invalid input. Please enter numbers.");
             scanner.nextLine(); // clear invalid input
         }
     }
