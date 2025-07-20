@@ -35,6 +35,15 @@ public class ScientificCalculator {
                 case 6:
                     performPower(scanner);
                     break;
+                case 7:
+                    performSine(scanner);
+                    break;
+                case 8:
+                    performCosine(scanner);
+                    break;
+                case 9:
+                    performTangent(scanner);
+                    break;
                 case 0:
                     System.out.println("Exiting calculator. Goodbye!");
                     break;
@@ -99,6 +108,23 @@ public class ScientificCalculator {
 
     public static double calculatePower(double base, double exponent) {
         return Math.pow(base, exponent);
+    }
+
+    public static double calculateSine(double degrees) {
+        return Math.sin(Math.toRadians(degrees));
+    }
+
+    public static double calculateCosine(double degrees) {
+        return Math.cos(Math.toRadians(degrees));
+    }
+
+    public static double calculateTangent(double degrees) {
+        double radians = Math.toRadians(degrees);
+        double cos = Math.cos(radians);
+        if (Math.abs(cos) < 1e-10) {
+            throw new ArithmeticException("Tangent is undefined at " + degrees + " degrees.");
+        }
+        return Math.tan(radians);
     }
 
     // --- Interaction Methods ---
@@ -202,6 +228,47 @@ public class ScientificCalculator {
         } catch (Exception e) {
             System.out.println("Invalid input. Please enter numbers.");
             scanner.nextLine(); // clear invalid input
+        }
+    }
+
+    private static void performSine(Scanner scanner) {
+        try {
+            System.out.print("Enter angle in degrees: ");
+            double degrees = scanner.nextDouble();
+
+            double result = calculateSine(degrees);
+            System.out.println("Result (sin): " + result);
+        } catch (Exception e) {
+            System.out.println("Invalid input.");
+            scanner.nextLine();
+        }
+    }
+
+    private static void performCosine(Scanner scanner) {
+        try {
+            System.out.print("Enter angle in degrees: ");
+            double degrees = scanner.nextDouble();
+
+            double result = calculateCosine(degrees);
+            System.out.println("Result (cos): " + result);
+        } catch (Exception e) {
+            System.out.println("Invalid input.");
+            scanner.nextLine();
+        }
+    }
+
+    private static void performTangent(Scanner scanner) {
+        try {
+            System.out.print("Enter angle in degrees: ");
+            double degrees = scanner.nextDouble();
+
+            double result = calculateTangent(degrees);
+            System.out.println("Result (tan): " + result);
+        } catch (ArithmeticException e) {
+            System.out.println("Math error: " + e.getMessage());
+        } catch (Exception e) {
+            System.out.println("Invalid input.");
+            scanner.nextLine();
         }
     }
 }
