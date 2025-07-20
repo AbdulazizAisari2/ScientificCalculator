@@ -10,8 +10,8 @@ public class ScientificCalculator {
             displayMenu();
 
             while (!scanner.hasNextInt()) {
-                System.out.print("Invalid input. Please enter a number: ");
-                scanner.next(); // discard invalid input
+                System.out.print("Invalid input. Please enter a number from the menu: ");
+                scanner.next();
             }
 
             choice = scanner.nextInt();
@@ -34,11 +34,8 @@ public class ScientificCalculator {
                 case 15: performFloor(scanner); break;
                 case 16: performMin(scanner); break;
                 case 17: performMax(scanner); break;
-                case 0:
-                    System.out.println("Exiting calculator. Goodbye!");
-                    break;
-                default:
-                    System.out.println("Invalid choice. Please try again.");
+                case 0: System.out.println("Exiting calculator. Goodbye!"); break;
+                default: System.out.println("Invalid choice. Please try again.");
             }
 
         } while (choice != 0);
@@ -77,55 +74,41 @@ public class ScientificCalculator {
         if (b == 0) throw new ArithmeticException("Cannot divide by zero.");
         return a / b;
     }
-    public static double calculateSquareRoot(double a) {
-        if (a < 0) throw new ArithmeticException("Cannot calculate square root of a negative number.");
+    public static double squareRoot(double a) {
+        if (a < 0) throw new ArithmeticException("Square root of negative number is undefined.");
         return Math.sqrt(a);
     }
-    public static double calculatePower(double base, double exp) {
+    public static double power(double base, double exp) {
         return Math.pow(base, exp);
     }
-    public static double calculateSine(double deg) {
-        return Math.sin(Math.toRadians(deg));
+    public static double sine(double degrees) {
+        return Math.sin(Math.toRadians(degrees));
     }
-    public static double calculateCosine(double deg) {
-        return Math.cos(Math.toRadians(deg));
+    public static double cosine(double degrees) {
+        return Math.cos(Math.toRadians(degrees));
     }
-    public static double calculateTangent(double deg) {
-        double radians = Math.toRadians(deg);
-        double cos = Math.cos(radians);
-        if (Math.abs(cos) < 1e-10)
-            throw new ArithmeticException("Tangent undefined at " + deg + " degrees.");
+    public static double tangent(double degrees) {
+        double radians = Math.toRadians(degrees);
+        if (Math.abs(Math.cos(radians)) < 1e-10) throw new ArithmeticException("Tangent undefined at this angle.");
         return Math.tan(radians);
     }
-    public static double calculateNaturalLogarithm(double a) {
-        if (a <= 0) throw new ArithmeticException("ln undefined for non-positive values.");
+    public static double naturalLog(double a) {
+        if (a <= 0) throw new ArithmeticException("ln undefined for non-positive numbers.");
         return Math.log(a);
     }
-    public static double calculateLogarithmBase10(double a) {
-        if (a <= 0) throw new ArithmeticException("log10 undefined for non-positive values.");
+    public static double logBase10(double a) {
+        if (a <= 0) throw new ArithmeticException("log₁₀ undefined for non-positive numbers.");
         return Math.log10(a);
     }
-    public static double calculateAbsoluteValue(double a) {
-        return Math.abs(a);
-    }
-    public static long roundNumber(double a) {
-        return Math.round(a);
-    }
-    public static double ceilingNumber(double a) {
-        return Math.ceil(a);
-    }
-    public static double floorNumber(double a) {
-        return Math.floor(a);
-    }
-    public static double findMin(double a, double b) {
-        return Math.min(a, b);
-    }
-    public static double findMax(double a, double b) {
-        return Math.max(a, b);
-    }
+    public static double absoluteValue(double a) { return Math.abs(a); }
+    public static long round(double a) { return Math.round(a); }
+    public static double ceiling(double a) { return Math.ceil(a); }
+    public static double floor(double a) { return Math.floor(a); }
+    public static double min(double a, double b) { return Math.min(a, b); }
+    public static double max(double a, double b) { return Math.max(a, b); }
 
     // --- Interaction Methods ---
-    private static void performAddition(Scanner s) {
+    public static void performAddition(Scanner s) {
         try {
             System.out.print("Enter first number: ");
             double a = s.nextDouble();
@@ -137,7 +120,7 @@ public class ScientificCalculator {
         }
     }
 
-    private static void performSubtraction(Scanner s) {
+    public static void performSubtraction(Scanner s) {
         try {
             System.out.print("Enter first number: ");
             double a = s.nextDouble();
@@ -149,7 +132,7 @@ public class ScientificCalculator {
         }
     }
 
-    private static void performMultiplication(Scanner s) {
+    public static void performMultiplication(Scanner s) {
         try {
             System.out.print("Enter first number: ");
             double a = s.nextDouble();
@@ -161,7 +144,7 @@ public class ScientificCalculator {
         }
     }
 
-    private static void performDivision(Scanner s) {
+    public static void performDivision(Scanner s) {
         try {
             System.out.print("Enter numerator: ");
             double a = s.nextDouble();
@@ -169,146 +152,141 @@ public class ScientificCalculator {
             double b = s.nextDouble();
             System.out.println("Result: " + divide(a, b));
         } catch (Exception e) {
-            System.out.println("Math error: " + e.getMessage());
-            s.nextLine();
+            System.out.println("Math error: " + e.getMessage()); s.nextLine();
         }
     }
 
-    private static void performSquareRoot(Scanner s) {
+    public static void performSquareRoot(Scanner s) {
         try {
             System.out.print("Enter number: ");
             double a = s.nextDouble();
-            System.out.println("Result: " + calculateSquareRoot(a));
+            System.out.println("Result: " + squareRoot(a));
         } catch (Exception e) {
-            System.out.println("Math error: " + e.getMessage());
-            s.nextLine();
+            System.out.println("Math error: " + e.getMessage()); s.nextLine();
         }
     }
 
-    private static void performPower(Scanner s) {
+    public static void performPower(Scanner s) {
         try {
             System.out.print("Enter base: ");
             double base = s.nextDouble();
             System.out.print("Enter exponent: ");
             double exp = s.nextDouble();
-            System.out.println("Result: " + calculatePower(base, exp));
+            System.out.println("Result: " + power(base, exp));
         } catch (Exception e) {
             System.out.println("Invalid input."); s.nextLine();
         }
     }
 
-    private static void performSine(Scanner s) {
+    public static void performSine(Scanner s) {
         try {
             System.out.print("Enter angle in degrees: ");
-            double deg = s.nextDouble();
-            System.out.println("Result (sin): " + calculateSine(deg));
+            double degrees = s.nextDouble();
+            System.out.println("Result: " + sine(degrees));
         } catch (Exception e) {
             System.out.println("Invalid input."); s.nextLine();
         }
     }
 
-    private static void performCosine(Scanner s) {
+    public static void performCosine(Scanner s) {
         try {
             System.out.print("Enter angle in degrees: ");
-            double deg = s.nextDouble();
-            System.out.println("Result (cos): " + calculateCosine(deg));
+            double degrees = s.nextDouble();
+            System.out.println("Result: " + cosine(degrees));
         } catch (Exception e) {
             System.out.println("Invalid input."); s.nextLine();
         }
     }
 
-    private static void performTangent(Scanner s) {
+    public static void performTangent(Scanner s) {
         try {
             System.out.print("Enter angle in degrees: ");
-            double deg = s.nextDouble();
-            System.out.println("Result (tan): " + calculateTangent(deg));
+            double degrees = s.nextDouble();
+            System.out.println("Result: " + tangent(degrees));
         } catch (Exception e) {
-            System.out.println("Math error: " + e.getMessage());
-            s.nextLine();
+            System.out.println("Math error: " + e.getMessage()); s.nextLine();
         }
     }
 
-    private static void performNaturalLog(Scanner s) {
+    public static void performNaturalLog(Scanner s) {
         try {
             System.out.print("Enter a positive number: ");
             double a = s.nextDouble();
-            System.out.println("Result (ln): " + calculateNaturalLogarithm(a));
+            System.out.println("Result: " + naturalLog(a));
         } catch (Exception e) {
-            System.out.println("Math error: " + e.getMessage());
-            s.nextLine();
+            System.out.println("Math error: " + e.getMessage()); s.nextLine();
         }
     }
 
-    private static void performLogBase10(Scanner s) {
+    public static void performLogBase10(Scanner s) {
         try {
             System.out.print("Enter a positive number: ");
             double a = s.nextDouble();
-            System.out.println("Result (log₁₀): " + calculateLogarithmBase10(a));
+            System.out.println("Result: " + logBase10(a));
         } catch (Exception e) {
-            System.out.println("Math error: " + e.getMessage());
-            s.nextLine();
+            System.out.println("Math error: " + e.getMessage()); s.nextLine();
         }
     }
 
-    private static void performAbsoluteValue(Scanner s) {
+    public static void performAbsoluteValue(Scanner s) {
         try {
             System.out.print("Enter number: ");
             double a = s.nextDouble();
-            System.out.println("Result (abs): " + calculateAbsoluteValue(a));
+            System.out.println("Result: " + absoluteValue(a));
         } catch (Exception e) {
             System.out.println("Invalid input."); s.nextLine();
         }
     }
 
-    private static void performRound(Scanner s) {
+    public static void performRound(Scanner s) {
         try {
             System.out.print("Enter number: ");
             double a = s.nextDouble();
-            System.out.println("Result (rounded): " + roundNumber(a));
+            System.out.println("Result: " + round(a));
         } catch (Exception e) {
             System.out.println("Invalid input."); s.nextLine();
         }
     }
 
-    private static void performCeiling(Scanner s) {
+    public static void performCeiling(Scanner s) {
         try {
             System.out.print("Enter number: ");
             double a = s.nextDouble();
-            System.out.println("Result (ceiling): " + ceilingNumber(a));
+            System.out.println("Result: " + ceiling(a));
         } catch (Exception e) {
             System.out.println("Invalid input."); s.nextLine();
         }
     }
 
-    private static void performFloor(Scanner s) {
+    public static void performFloor(Scanner s) {
         try {
             System.out.print("Enter number: ");
             double a = s.nextDouble();
-            System.out.println("Result (floor): " + floorNumber(a));
+            System.out.println("Result: " + floor(a));
         } catch (Exception e) {
             System.out.println("Invalid input."); s.nextLine();
         }
     }
 
-    private static void performMin(Scanner s) {
+    public static void performMin(Scanner s) {
         try {
             System.out.print("Enter first number: ");
             double a = s.nextDouble();
             System.out.print("Enter second number: ");
             double b = s.nextDouble();
-            System.out.println("Result (min): " + findMin(a, b));
+            System.out.println("Result: " + min(a, b));
         } catch (Exception e) {
             System.out.println("Invalid input."); s.nextLine();
         }
     }
 
-    private static void performMax(Scanner s) {
+    public static void performMax(Scanner s) {
         try {
             System.out.print("Enter first number: ");
             double a = s.nextDouble();
             System.out.print("Enter second number: ");
             double b = s.nextDouble();
-            System.out.println("Result (max): " + findMax(a, b));
+            System.out.println("Result: " + max(a, b));
         } catch (Exception e) {
             System.out.println("Invalid input."); s.nextLine();
         }
